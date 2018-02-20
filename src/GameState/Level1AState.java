@@ -86,7 +86,7 @@ public class Level1AState extends LevelState {
 			tileMap.getHeight() - 2 * tileMap.getTileSize(),
 			0, 0
 		);
-		tileMap.setTween(1);
+		tileMap.setTween(0.2);
 		
 		// player
 		player = new Player(tileMap, gsm, this);
@@ -98,8 +98,8 @@ public class Level1AState extends LevelState {
 			System.out.println("True");
 			if(GameStateManager.getNetworkConnection()){
 				try {
-					dIn = new DataInputStream(socket.getInputStream());
 					dOut = new DataOutputStream(socket.getOutputStream());
+					dIn = new DataInputStream(socket.getInputStream());
 				} catch (Exception e) {e.printStackTrace();}
 			}
 			player2 = new Player(tileMap, gsm, this);
@@ -153,8 +153,8 @@ public class Level1AState extends LevelState {
 		JukeBox.load("/SFX/enemyhit.mp3", "enemyhit");
 		
 		// music
-		JukeBox.load("/Music/level1.mp3", "level1");
-		JukeBox.loop("level1", 600, JukeBox.getFrames("level1") - 2200);
+//		JukeBox.load("/Music/level1.mp3", "level1");                    <=================================== Music Disabled =======================================
+//		JukeBox.loop("level1", 600, JukeBox.getFrames("level1") - 2200);
 		
 		keys = new Keys(gsm, player, player2);
 		
@@ -223,12 +223,15 @@ public class Level1AState extends LevelState {
 			try {
 				dOut.writeDouble(player.getx());
 				dOut.writeDouble(player.gety());
+				dOut.writeDouble(player.getdx());
+				dOut.writeDouble(player.getdy());
 				dOut.writeInt(player.getAnimation());
 				dOut.writeBoolean(player.getFacingright());
 				dOut.flush();
 			} catch (IOException e) {e.printStackTrace();}
 			try {
 				player2.setPosition(dIn.readDouble(),dIn.readDouble());
+				player2.setVector(dIn.readDouble(), dIn.readDouble());
 				player2.setAnimation(dIn.readInt());
 				player2.setFacingRight(dIn.readBoolean());
 			} catch (IOException e) {e.printStackTrace();}
@@ -277,16 +280,18 @@ public class Level1AState extends LevelState {
 		if (GameStateManager.getTwoPlayer()) player2.update();
 		
 		// update tilemap
-		tileMap.setPosition(
-			GamePanel.WIDTH / 2 - player.getx(),
-			GamePanel.HEIGHT / 2 - player.gety()
-		);
-//		if (GameStateManager.getTwoPlayer()){
-//			tileMap.setPosition(
-//				GamePanel.WIDTH / 2 - player2.getx(),
-//				GamePanel.HEIGHT / 2 - player2.gety()
-//			);
-//		}
+		if (GameStateManager.getTwoPlayer() 
+				&& ( java.lang.Math.abs( player.getx() - player2.getx() ) < GamePanel.WIDTH * 0.8 ) ){
+			tileMap.setPosition(
+				GamePanel.WIDTH / 2 - (player.getx() + player2.getx()) / 2,
+				GamePanel.HEIGHT / 2 - (player.gety() + player2.gety()) / 2
+			);
+		} else {
+			tileMap.setPosition(
+					GamePanel.WIDTH / 2 - player.getx(),
+					GamePanel.HEIGHT / 2 - player.gety()
+				);
+		}
 		tileMap.update();
 		tileMap.fixBounds();
 		

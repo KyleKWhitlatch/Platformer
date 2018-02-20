@@ -104,6 +104,7 @@ public class ConnectState extends GameState {
 		if(currentChoice == 0) {
 			GameStateManager.setTwoPlayer(true);
 			GameStateManager.setNetworkConnection(true);
+			GameStateManager.setHost(true);
 			gsm.setLevelState(GameStateManager.LEVEL1ASTATE, null, null, socket);
 		}
 		else if(currentChoice == 1) {

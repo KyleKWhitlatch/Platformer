@@ -17,12 +17,12 @@ public class Explosion extends MapObject {
 	private int speed;
 	private double diagSpeed;
 	
-	public Explosion(TileMap tm, int x, int y) {
+	public Explosion(TileMap tm, double d, double e) {
 		
 		super(tm);
 		
-		this.x = x;
-		this.y = y;
+		this.x = d;
+		this.y = e;
 		
 		width = 30;
 		height = 30;
@@ -37,7 +37,7 @@ public class Explosion extends MapObject {
 		
 		points = new Point[8];
 		for(int i = 0; i < points.length; i++) {
-			points[i] = new Point(x, y);
+			points[i] = new Point((int)d, (int)e);
 		}
 		
 	}

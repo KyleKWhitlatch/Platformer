@@ -42,8 +42,8 @@ public abstract class MapObject {
 	protected boolean bottomRight;
 	
 	// animation
-	protected Animation animation;
-	protected int currentAction;
+	public Animation animation;
+	public int currentAction;
 	protected int previousAction;
 	protected boolean facingRight;
 	
@@ -182,8 +182,10 @@ public abstract class MapObject {
 		
 	}
 	
-	public int getx() { return (int)x; }
-	public int gety() { return (int)y; }
+	public double getx() { return x; }
+	public double gety() { return y; }
+	public double getdx() { return dx; }
+	public double getdy() { return dy; }
 	public int getWidth() { return width; }
 	public int getHeight() { return height; }
 	public int getCWidth() { return cwidth; }

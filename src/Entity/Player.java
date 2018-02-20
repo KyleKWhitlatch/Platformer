@@ -369,9 +369,6 @@ public class Player extends MapObject {
 		width = FRAMEWIDTHS[currentAction];
 		height = FRAMEHEIGHTS[currentAction];
 	}
-	public int getAnimation(){
-		return currentAction;
-	}
 	
 	public void update() {
 		
@@ -623,5 +620,6 @@ public class Player extends MapObject {
 	public void setBlockInput( boolean b ) { blockInput = b; }
 	public boolean getFacingright() {return facingRight;}
 	public void setFacingRight( boolean b ) { facingRight = b; }
+	public int getAnimation(){return currentAction;}
 	
 }
