@@ -90,7 +90,7 @@ public class MenuState extends GameState {
 		
 		// other
 		g.setFont(font2);
-		g.drawString("2013 Mike S.", 10, 232);
+		g.drawString("2018 Kyle Whitlatch", 10, 232);
 		
 	}
 	
