@@ -20,6 +20,7 @@ public class Enemy extends MapObject {
 	}
 	
 	public boolean isDead() { return dead; }
+	public void setDead() { dead = true; }
 	public boolean shouldRemove() { return remove; }
 	
 	public int getDamage() { return damage; }

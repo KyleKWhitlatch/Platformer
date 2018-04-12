@@ -108,8 +108,8 @@ public class Level1AState extends LevelState {
 		
 		// enemies
 		enemies = new ArrayList<Enemy>();
-		eprojectiles = new ArrayList<EnemyProjectile>();
-		populateEnemies();
+//		eprojectiles = new ArrayList<EnemyProjectile>();
+//		populateEnemies();
 		
 		// energy particle
 		energyParticles = new ArrayList<EnergyParticle>();
@@ -160,82 +160,120 @@ public class Level1AState extends LevelState {
 		
 	}
 	
-	private void populateEnemies() {
-		enemies.clear();
-		/*Tengu t = new Tengu(tileMap, player, enemies);
-		t.setPosition(1300, 100);
-		enemies.add(t);
-		t = new Tengu(tileMap, player, enemies);
-		t.setPosition(1330, 100);
-		enemies.add(t);
-		t = new Tengu(tileMap, player, enemies);
-		t.setPosition(1360, 100);
-		enemies.add(t);*/
-		GelPop gp;
-		Gazer g;
-		
-		gp = new GelPop(tileMap, player);
-		gp.setPosition(1300, 100);
-		enemies.add(gp);
-		gp = new GelPop(tileMap, player);
-		gp.setPosition(1320, 100);
-		enemies.add(gp);
-		gp = new GelPop(tileMap, player);
-		gp.setPosition(1340, 100);
-		enemies.add(gp);
-		gp = new GelPop(tileMap, player);
-		gp.setPosition(1660, 100);
-		enemies.add(gp);
-		gp = new GelPop(tileMap, player);
-		gp.setPosition(1680, 100);
-		enemies.add(gp);
-		gp = new GelPop(tileMap, player);
-		gp.setPosition(1700, 100);
-		enemies.add(gp);
-		gp = new GelPop(tileMap, player);
-		gp.setPosition(2177, 100);
-		enemies.add(gp);
-		gp = new GelPop(tileMap, player);
-		gp.setPosition(2960, 100);
-		enemies.add(gp);
-		gp = new GelPop(tileMap, player);
-		gp.setPosition(2980, 100);
-		enemies.add(gp);
-		gp = new GelPop(tileMap, player);
-		gp.setPosition(3000, 100);
-		enemies.add(gp);
-		
-		g = new Gazer(tileMap);
-		g.setPosition(2600, 100);
-		enemies.add(g);
-		g = new Gazer(tileMap);
-		g.setPosition(3500, 100);
-		enemies.add(g);
-	}
-	
+//	private void populateEnemies() {
+//		enemies.clear();
+//		/*Tengu t = new Tengu(tileMap, player, enemies);
+//		t.setPosition(1300, 100);
+//		enemies.add(t);
+//		t = new Tengu(tileMap, player, enemies);
+//		t.setPosition(1330, 100);
+//		enemies.add(t);
+//		t = new Tengu(tileMap, player, enemies);
+//		t.setPosition(1360, 100);
+//		enemies.add(t);*/
+//		GelPop gp;
+//		Gazer g;
+//		
+//		gp = new GelPop(tileMap, player);
+//		gp.setPosition(1300, 100);
+//		enemies.add(gp);
+//		gp = new GelPop(tileMap, player);
+//		gp.setPosition(1320, 100);
+//		enemies.add(gp);
+//		gp = new GelPop(tileMap, player);
+//		gp.setPosition(1340, 100);
+//		enemies.add(gp);
+//		gp = new GelPop(tileMap, player);
+//		gp.setPosition(1660, 100);
+//		enemies.add(gp);
+//		gp = new GelPop(tileMap, player);
+//		gp.setPosition(1680, 100);
+//		enemies.add(gp);
+//		gp = new GelPop(tileMap, player);
+//		gp.setPosition(1700, 100);
+//		enemies.add(gp);
+//		gp = new GelPop(tileMap, player);
+//		gp.setPosition(2177, 100);
+//		enemies.add(gp);
+//		gp = new GelPop(tileMap, player);
+//		gp.setPosition(2960, 100);
+//		enemies.add(gp);
+//		gp = new GelPop(tileMap, player);
+//		gp.setPosition(2980, 100);
+//		enemies.add(gp);
+//		gp = new GelPop(tileMap, player);
+//		gp.setPosition(3000, 100);
+//		enemies.add(gp);
+//		
+//		g = new Gazer(tileMap);
+//		g.setPosition(2600, 100);
+//		enemies.add(g);
+//		g = new Gazer(tileMap);
+//		g.setPosition(3500, 100);
+//		enemies.add(g);
+//	}
+
+
 	//public void 
 	public void update(){
 		
 		// check keys
 		Keys.update();
-		
+
+		// update enemies
+		boolean deadEnemy = false;
+		int deadEnemyNumber = 0;
+//		for(int i = 0; i < enemies.size(); i++) {
+//			Enemy e = enemies.get(i);
+//			e.update();
+//			if(e.isDead()) {
+//				deadEnemy = true;
+//				deadEnemyNumber = i;
+//				enemies.remove(i);
+//				i--;
+//				explosions.add(new Explosion(tileMap, e.getx(), e.gety()));
+//			}
+//		}
+
 		if(GameStateManager.getNetworkConnection()){
 			try {
-				dOut.writeDouble(player.getx());
-				dOut.writeDouble(player.gety());
-				dOut.writeDouble(player.getdx());
-				dOut.writeDouble(player.getdy());
-				dOut.writeInt(player.getAnimation());
-				dOut.writeBoolean(player.getFacingright());
-				dOut.flush();
+				dOut.writeDouble(player.getx()); //1
+				dOut.writeDouble(player.gety()); //2
+				dOut.writeDouble(player.getdx()); //3
+				dOut.writeDouble(player.getdy()); //4
+				dOut.writeBoolean(player.getLeft()); //5
+				dOut.writeBoolean(player.getRight()); //6
+				dOut.writeBoolean(player.getCharging()); //7 
+				dOut.writeBoolean(player.getDashing()); //8 
+				dOut.writeBoolean(player.getAttacking()); //9
+				dOut.writeBoolean(player.getKnockback()); //10
+//				dOut.writeBoolean(deadEnemy);
+//				if(deadEnemy)
+//					dOut.writeInt(deadEnemyNumber);
+//				dOut.flush();
 			} catch (IOException e) {e.printStackTrace();}
 			try {
-				player2.setPosition(dIn.readDouble(),dIn.readDouble());
-				player2.setVector(dIn.readDouble(), dIn.readDouble());
-				player2.setAnimation(dIn.readInt());
-				player2.setFacingRight(dIn.readBoolean());
+				player2.setPosition(dIn.readDouble(),dIn.readDouble()); //1, 2
+				player2.setVector(dIn.readDouble(), dIn.readDouble()); //3, 4
+				//player2.setAnimation(dIn.readInt());
+				player2.setLeft(dIn.readBoolean()); //5
+				player2.setRight(dIn.readBoolean()); //6
+				player2.setCharging(dIn.readBoolean()); //7
+				player2.setDashing(dIn.readBoolean()); //8
+				if(dIn.readBoolean()){player2.setAttacking();}; //9
+				player2.setKnockback(dIn.readBoolean()); //10
+//				if(dIn.readBoolean()){
+//					int i = dIn.readInt();
+//					Enemy e = enemies.get(i);
+//					e.update();
+//					e.setDead();
+//					enemies.remove(i);
+//					explosions.add(new Explosion(tileMap, e.getx(), e.gety()));
+//					}
 			} catch (IOException e) {e.printStackTrace();}
 		}
+		
+
 		
 		// check if end of level event should start
 		if(teleport.contains(player)) {
@@ -295,26 +333,17 @@ public class Level1AState extends LevelState {
 		tileMap.update();
 		tileMap.fixBounds();
 		
-		// update enemies
-		for(int i = 0; i < enemies.size(); i++) {
-			Enemy e = enemies.get(i);
-			e.update();
-			if(e.isDead()) {
-				enemies.remove(i);
-				i--;
-				explosions.add(new Explosion(tileMap, e.getx(), e.gety()));
-			}
-		}
+
 		
 		// update enemy projectiles
-		for(int i = 0; i < eprojectiles.size(); i++) {
-			EnemyProjectile ep = eprojectiles.get(i);
-			ep.update();
-			if(ep.shouldRemove()) {
-				eprojectiles.remove(i);
-				i--;
-			}
-		}
+//		for(int i = 0; i < eprojectiles.size(); i++) {
+//			EnemyProjectile ep = eprojectiles.get(i);
+//			ep.update();
+//			if(ep.shouldRemove()) {
+//				eprojectiles.remove(i);
+//				i--;
+//			}
+//		}
 		
 		// update explosions
 		for(int i = 0; i < explosions.size(); i++) {
@@ -346,9 +375,9 @@ public class Level1AState extends LevelState {
 		}
 		
 		// draw enemy projectiles
-		for(int i = 0; i < eprojectiles.size(); i++) {
-			eprojectiles.get(i).draw(g);
-		}
+//		for(int i = 0; i < eprojectiles.size(); i++) {
+//			eprojectiles.get(i).draw(g);
+//		}
 		
 		// draw explosions
 		for(int i = 0; i < explosions.size(); i++) {
@@ -387,7 +416,7 @@ public class Level1AState extends LevelState {
 	public void reset() {
 		player.reset();
 		player.setPosition(300, 161);
-		populateEnemies();
+//		populateEnemies();
 		player.setBlockInput(true);
 		eventCount = 0;
 		tileMap.setShaking(false, 0);

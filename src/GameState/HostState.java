@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -31,16 +33,14 @@ public class HostState extends GameState {
 	
 	private ServerSocket serverSocket = null;
 	private Socket socket = null;
+	String localhost;
+	private boolean connected = false;
 	
 	public HostState(GameStateManager gsm) {
 		
 		super(gsm);
 		
 		try {
-			// Create Server socket
-			serverSocket = new ServerSocket(12345);
-			socket = serverSocket.accept();
-			
 			
 			// load floating head
 			head = ImageIO.read(
@@ -57,19 +57,25 @@ public class HostState extends GameState {
 			JukeBox.load("/SFX/menuoption.mp3", "menuoption");
 			JukeBox.load("/SFX/menuselect.mp3", "menuselect");
 			
+			InetAddress inetAddress = InetAddress.getLocalHost();
+			localhost = "Your Address:- " + inetAddress.getHostAddress();
+			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
 		
+		
 	}
 	
-	public void init() {}
+	public void init() {
+	}
 	
 	public void update() {
 		
 		// check keys
 		handleInput();
+		if(!connected) connect();
 		
 	}
 	
@@ -87,6 +93,7 @@ public class HostState extends GameState {
 		// draw menu options
 		g.setFont(font);
 		g.setColor(Color.WHITE);
+		g.drawString(localhost, 70, 125);
 		g.drawString("Start Game", 145, 165);
 		g.drawString("Back", 145, 185);
 		
@@ -126,6 +133,20 @@ public class HostState extends GameState {
 				currentChoice++;
 			}
 		}
+	}
+	
+	public void connect() {
+		
+		// Create Server socket
+		try {
+			serverSocket = new ServerSocket(12345);
+			socket = serverSocket.accept();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if( socket != null ) connected = true;
 	}
 	
 }

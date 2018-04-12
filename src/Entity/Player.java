@@ -15,7 +15,7 @@ import TileMap.TileMap;
 public class Player extends MapObject {
 	
 	// references
-	private ArrayList<Enemy> enemies;
+	public ArrayList<Enemy> enemies;
 	
 	// player stuff
 	private int lives;
@@ -34,12 +34,12 @@ public class Player extends MapObject {
 	private long time;
 	
 	// actions
-	private boolean dashing;
-	private boolean attacking;
-	private boolean upattacking;
-	private boolean charging;
-	private int chargingTick;
-	private boolean teleporting;
+	public boolean dashing;
+	public boolean attacking;
+	public boolean upattacking;
+	public boolean charging;
+	public int chargingTick;
+	public boolean teleporting;
 	private boolean blockInput;
 	
 	// animations
@@ -62,17 +62,17 @@ public class Player extends MapObject {
 	private Rectangle cr;
 	
 	// animation actions
-	private static final int IDLE = 0;
-	private static final int WALKING = 1;
-	private static final int ATTACKING = 2;
-	private static final int JUMPING = 3;
-	private static final int FALLING = 4;
-	private static final int UPATTACKING = 5;
-	private static final int CHARGING = 6;
-	private static final int DASHING = 7;
-	private static final int KNOCKBACK = 8;
-	private static final int DEAD = 9;
-	private static final int TELEPORTING = 10;
+	public static final int IDLE = 0;
+	public static final int WALKING = 1;
+	public static final int ATTACKING = 2;
+	public static final int JUMPING = 3;
+	public static final int FALLING = 4;
+	public static final int UPATTACKING = 5;
+	public static final int CHARGING = 6;
+	public static final int DASHING = 7;
+	public static final int KNOCKBACK = 8;
+	public static final int DEAD = 9;
+	public static final int TELEPORTING = 10;
 	
 	// emotes
 	private BufferedImage confused;
@@ -576,7 +576,7 @@ public class Player extends MapObject {
 			if(currentAction != WALKING) {
 				setAnimation(WALKING);
 			}
-		}
+		} 
 		else if(currentAction != IDLE) {
 			setAnimation(IDLE);
 		}
@@ -618,8 +618,17 @@ public class Player extends MapObject {
 
 	public boolean blockInput() { return blockInput; }
 	public void setBlockInput( boolean b ) { blockInput = b; }
-	public boolean getFacingright() {return facingRight;}
-	public void setFacingRight( boolean b ) { facingRight = b; }
+	public boolean getRight() {return right;}
+	public void setRight( boolean b ) {right = b;}
+	public boolean getLeft() {return left;}
+	public void setLeft( boolean b ) {left = b;}
+	public boolean getCharging() {return charging;}
+	public void setCharging( boolean b ) {charging = b;}
+	public boolean getDashing() {return dashing;}
+	public boolean getAttacking() {return attacking;}
+	public boolean getKnockback() {return knockback;}
 	public int getAnimation(){return currentAction;}
+
+	public void setKnockback(boolean b) {knockback = b;}
 	
 }

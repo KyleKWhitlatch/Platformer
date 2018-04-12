@@ -18,9 +18,8 @@ public class ConnectState extends GameState {
 	
 	private int currentChoice = 0;
 	private String[] options = {
-		"Not",
-		"Yet",
-		"Implemented"
+		"Start Game",
+		"Cancel"
 	};
 	
 	private Color titleColor;
@@ -92,7 +91,6 @@ public class ConnectState extends GameState {
 		// draw floating head
 		if(currentChoice == 0) g.drawImage(head, 125, 154, null);
 		else if(currentChoice == 1) g.drawImage(head, 125, 174, null);
-		else if(currentChoice ==2) g.drawImage(head, 125, 194, null);
 		
 		// other
 		g.setFont(font2);
@@ -108,9 +106,6 @@ public class ConnectState extends GameState {
 			gsm.setLevelState(GameStateManager.LEVEL1ASTATE, null, null, socket);
 		}
 		else if(currentChoice == 1) {
-			gsm.setState(GameStateManager.MENUSTATE);
-		}
-		else if(currentChoice == 2) {
 			gsm.setState(GameStateManager.MENUSTATE);
 		}
 	}
