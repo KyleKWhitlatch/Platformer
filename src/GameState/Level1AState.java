@@ -424,14 +424,14 @@ public class Level1AState extends LevelState {
 		System.out.println("Level reset!");
 		//populateEnemies();
 		p.setBlockInput(true);
-		eventCount = 0;
-		tileMap.setShaking(false, 0);
-		eventStart = true;
-		eventStart();
-		title = new Title(hageonText.getSubimage(0, 0, 178, 20));
-		title.sety(60);
-		subtitle = new Title(hageonText.getSubimage(0, 33, 91, 13));
-		subtitle.sety(85);
+//		eventCount = 0;
+//		tileMap.setShaking(false, 0);
+//		eventStart = true;
+//		eventStart();
+//		title = new Title(hageonText.getSubimage(0, 0, 178, 20));
+//		title.sety(60);
+//		subtitle = new Title(hageonText.getSubimage(0, 33, 91, 13));
+//		subtitle.sety(85);
 		p.setBlockInput(false);
 	}
 	
