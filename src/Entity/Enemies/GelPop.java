@@ -58,10 +58,10 @@ public class GelPop extends Enemy {
 	
 	public void update() {
 		
-		if(!active) {
-			if(Math.abs(player.getx() - x) < GamePanel.WIDTH) active = true;
-			return;
-		}
+//		if(!active) {
+//			if(Math.abs(player.getx() - x) < GamePanel.WIDTH) active = true;
+//			return;
+//		}
 		
 		// check if done flinching
 		if(flinching) {

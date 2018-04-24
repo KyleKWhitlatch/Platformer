@@ -52,7 +52,9 @@ public class ConnectState extends GameState {
 			JukeBox.load("/SFX/menuselect.mp3", "menuselect");
 			
 			socket = new Socket("localHost", 12345);
-			System.out.println("Connected");
+			GameStateManager.setHost(false);
+			System.out.println("Connected, Host: " + GameStateManager.getHost());
+
 			
 		}
 		catch(Exception e) {
@@ -103,7 +105,7 @@ public class ConnectState extends GameState {
 			GameStateManager.setTwoPlayer(true);
 			GameStateManager.setNetworkConnection(true);
 			GameStateManager.setHost(true);
-			gsm.setLevelState(GameStateManager.LEVEL1ASTATE, null, null, socket);
+			gsm.setLevelState(GameStateManager.LEVEL1ASTATE, null, null, socket, false);
 		}
 		else if(currentChoice == 1) {
 			gsm.setState(GameStateManager.MENUSTATE);

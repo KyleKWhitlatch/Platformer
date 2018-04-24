@@ -112,7 +112,7 @@ public class HostState extends GameState {
 			GameStateManager.setTwoPlayer(true);
 			GameStateManager.setNetworkConnection(true);
 			GameStateManager.setHost(true);
-			gsm.setLevelState(GameStateManager.LEVEL1ASTATE, null, null, socket);
+			gsm.setLevelState(GameStateManager.LEVEL1ASTATE, null, null, socket, true);
 		}
 		else if(currentChoice == 1) {
 			gsm.setState(GameStateManager.MENUSTATE);

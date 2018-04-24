@@ -97,6 +97,7 @@ public class MenuState extends GameState {
 	private void select() {
 		if(currentChoice == 0) {
 			JukeBox.play("menuselect");
+			GameStateManager.setHost(true);
 			gsm.setState(GameStateManager.LEVEL1ASTATE);
 		}
 		else if(currentChoice == 1) {

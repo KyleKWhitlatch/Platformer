@@ -30,7 +30,7 @@ public class GameStateManager {
 	
 	public static boolean twoPlayer = false;
 	public static boolean networkConnection = false;
-	public static boolean host = false;
+	private static boolean host = false;
 	private Player player;
 	private Player player2;
 	private Socket socket;
@@ -66,12 +66,12 @@ public class GameStateManager {
 		else if(state == GAMEOVERSTATE)
 			gameStates[state] = new ConnectState(this);
 		if(state == LEVEL1ASTATE)
-			gameStates[state] = new Level1AState(this, player, player2, socket);
+			gameStates[state] = new Level1AState(this, player, player2, socket, host);
 	}
 	
-	private void loadLevelState(int state, Player p1, Player p2, Socket socket) {
+	private void loadLevelState(int state, Player p1, Player p2, Socket socket, boolean b) {
 		if(state == LEVEL1ASTATE)
-			gameStates[state] = new Level1AState(this, p1, p2, socket);
+			gameStates[state] = new Level1AState(this, p1, p2, socket, b);
 		else if(state == LEVEL1BSTATE)
 			gameStates[state] = new Level1BState(this, p1, p2);
 		else if(state == LEVEL1CSTATE)
@@ -88,10 +88,10 @@ public class GameStateManager {
 		currentState = state;
 		loadState(currentState);
 	}
-	public void setLevelState(int level, Player p1, Player p2, Socket socket) {
+	public void setLevelState(int level, Player p1, Player p2, Socket socket, boolean b) {
 		unloadState(currentState);
 		currentState = level;
-		loadLevelState(currentState, p1, p2, socket);
+		loadLevelState(currentState, p1, p2, socket, b);
 	}
 	
 	public void setPaused(boolean b) { paused = b; }

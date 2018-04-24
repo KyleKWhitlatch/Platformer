@@ -100,7 +100,8 @@ public class OptionState extends GameState {
 	private void select() {
 		if(currentChoice == 0) {
 			GameStateManager.setTwoPlayer(true);
-			gsm.setLevelState(GameStateManager.LEVEL1ASTATE, null, null, null);
+			GameStateManager.setHost(true);
+			gsm.setLevelState(GameStateManager.LEVEL1ASTATE, null, null, null, true);
 		}
 		if(currentChoice == 1) {
 			gsm.setState(GameStateManager.HOSTSTATE);

@@ -226,7 +226,8 @@ public class Player extends MapObject {
 			lives = 0;
 			gsm.setState(GameStateManager.GAMEOVERSTATE);
 		}
-		currentLevel.reset();
+		currentLevel.reset(this);
+		blockInput = false;
 	}
 	
 	public String getTimeToString() {

@@ -212,12 +212,6 @@ public abstract class MapObject {
 	public void setDown(boolean b) { down = b; }
 	public void setJumping(boolean b) { jumping = b; }
 	
-	public boolean notOnScreen() {
-		return x + xmap + width < 0 ||
-			x + xmap - width > GamePanel.WIDTH ||
-			y + ymap + height < 0 ||
-			y + ymap - height > GamePanel.HEIGHT;
-	}
 	
 	public void draw(java.awt.Graphics2D g) {
 		setMapPosition();
